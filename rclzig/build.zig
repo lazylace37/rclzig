@@ -55,7 +55,6 @@ pub fn build(b: *std.Build) void {
 
     lib_unit_tests.addIncludePath(.{ .cwd_relative = "/opt/ros/jazzy/include/rosidl_typesupport_introspection_c" });
     lib_unit_tests.addIncludePath(.{ .cwd_relative = "/opt/ros/jazzy/include/rosidl_typesupport_introspection_cpp" });
-    lib_unit_tests.addIncludePath(.{ .cwd_relative = "/opt/ros/jazzy/include/std_msgs" });
     lib_unit_tests.addIncludePath(.{ .cwd_relative = "/opt/ros/jazzy/include/rcl" });
     lib_unit_tests.addIncludePath(.{ .cwd_relative = "/opt/ros/jazzy/include/rcl_interfaces" });
     lib_unit_tests.addIncludePath(.{ .cwd_relative = "/opt/ros/jazzy/include/rcl_logging_interface" });
@@ -67,12 +66,18 @@ pub fn build(b: *std.Build) void {
     lib_unit_tests.addIncludePath(.{ .cwd_relative = "/opt/ros/jazzy/include/type_description_interfaces" });
     lib_unit_tests.addIncludePath(.{ .cwd_relative = "/opt/ros/jazzy/include/rosidl_dynamic_typesupport" });
 
+    lib_unit_tests.addIncludePath(.{ .cwd_relative = "/opt/ros/jazzy/include/std_msgs" });
+    lib_unit_tests.addIncludePath(.{ .cwd_relative = "/opt/ros/jazzy/include/geometry_msgs" });
+
     lib_unit_tests.addIncludePath(.{ .cwd_relative = "./src/" });
     lib_unit_tests.addLibraryPath(.{ .cwd_relative = "/opt/ros/jazzy/lib/" });
     lib_unit_tests.linkSystemLibrary("rcl");
     lib_unit_tests.linkSystemLibrary("rcutils");
     lib_unit_tests.linkSystemLibrary("rmw");
     lib_unit_tests.linkSystemLibrary("std_msgs__rosidl_generator_c");
+    lib_unit_tests.linkSystemLibrary("std_msgs__rosidl_typesupport_c");
+    lib_unit_tests.linkSystemLibrary("geometry_msgs__rosidl_generator_c");
+    lib_unit_tests.linkSystemLibrary("geometry_msgs__rosidl_typesupport_c");
     lib_unit_tests.linkLibC();
 
     const run_lib_unit_tests = b.addRunArtifact(lib_unit_tests);
